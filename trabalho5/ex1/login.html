@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulários em HTML</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+
+    <main>
+        <form>
+            <div>
+                <label for="usuario">Usuário:</label>
+            </div>
+            <div>
+                <input type="text" id="usuario" name="nomeUsuario" minlength="2" maxlength="50" required>
+            </div>
+            <div>
+                <label for="senha">Senha:</label>
+            </div>
+            <div>
+                <input type="password" id="senha" name="senhaUsuario" minlength="2" maxlength="50" required>
+            </div>
+            <button> <span class="material-symbols-outlined"> login </span> Entrar </button>
+        </form>
+    </main>
+</body>

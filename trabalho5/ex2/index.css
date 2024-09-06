@@ -1,0 +1,74 @@
+body {
+    background-color: #dcdcdc;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 10px auto 0 auto;
+}
+
+main {
+    width: 80%;
+    margin: auto;
+}
+
+h1 {
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    display: flex;
+    background-color: #444444;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: #bfbfbf;
+    height: 9vh;
+    margin-block: 1rem;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+.card {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 20px;
+    width: 250px;
+    max-width: 350px;
+    flex: 1 1 auto;
+    padding: 1.5rem;
+}
+
+img {
+    width: 250px;
+    height: auto;
+}
+
+.dentro {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+div h2 {
+    color: #6b6b6b;
+    margin: 0;
+}
+
+.value {
+    color: red;
+    font-weight: bold;
+}
+
+@media (max-width: 400px) {
+    main {
+        width: 100%;
+    }
+}

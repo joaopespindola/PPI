@@ -2,6 +2,7 @@ body {
     background-color: #dcdcdc;
     text-align: justify;
     width: 70%;
+    margin: 40px auto;
     border-radius: 15px;
     margin: 10px auto 0 auto;
 }
@@ -15,10 +16,6 @@ h1 {
     margin: auto;
     padding: 20px;
     line-height: 3em;
-}
-
-table {
-    margin: auto;
 }
 
 .listaHorizontal>li {
@@ -57,14 +54,26 @@ footer {
     padding: 30px;
 }
 
-td {
-    padding: 20px;
+@media (max-width: 600px){
+    h1{
+        font-size: 5vw;
+    }
+    body {
+        width: 95%;
+    }
 }
 
-img {
-    border-radius: 15px;
-    width: 200px;
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.container img {
+    flex: 1 1 auto; 
     height: 150px;
-    box-shadow: 5px 5px 5px gray;
+    width: auto;
+    object-fit: cover;
     border-radius: 12px;
+    box-shadow: 5px 5px 5px gray;
 }
