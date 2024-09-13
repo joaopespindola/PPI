@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Peso Ideal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        header h1 {
+            text-align: center;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            width: 1280px;
+            height: 720px;
+            margin: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Calcule o seu peso ideal</h1>
+    </header>
+    <main>
+        <div class="form">
+            <div>
+                <label for="altura">Altura:</label>
+                <input type="number" id="altura" name="alturaUsuario" required autofocus>
+            </div>
+
+            <fieldset>
+                <legend>Selecione o seu sexo</legend>
+                <div>
+                    <label>Sexo:</label>
+                    <input type="radio" id="masculino" name="sexo" value="masculino">
+                    <label for="masculino">Masculino</label>
+
+                    <input type="radio" id="feminino" name="sexo" value="feminino">
+                    <label for="feminino">Feminino</label>
+                </div>
+        </fieldset>
+
+        <button type="button">Clique para calcular o seu peso ideal</button>
+        <P id="resultado"></P>
+        </div>
+        <img src="images/print-debug-peso-ideal.png" alt="Print do depuramento da página de peso ideal">
+        <script>
+            function calculaPesoIdeal() {
+                var pesoIdeal = 0;
+                const nodeRadio = document.querySelector('input[name="sexo"]:checked');
+                const campoAltura = document.querySelector('#altura')
+                let alturaConvertida = parseInt(campoAltura.value);
+
+                if (nodeRadio.value === "masculino") {
+                    pesoIdeal = 52 + (0.75 * (alturaConvertida - 152.4));
+                } else if (nodeRadio.value === "feminino") {
+                    pesoIdeal = 2 + (0.67 * (alturaConvertida - 152.4))
+                }
+                return pesoIdeal;
+            }
+            const botao = document.querySelector("button");
+            botao.onclick = function () {
+                let peso = calculaPesoIdeal();
+                const resultado = document.querySelector('#resultado');
+                resultado.textContent = `O seu peso ideal é de ${peso.toFixed(2)} kg`;
+            };
+        </script>
+
+
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JavaScript</title>
+    <style>
+        img {
+            width: 1280px;
+            height: 720px;
+        }
+        .form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <main>
+        <div class="form">
+            <input type="text" name="nome">
+            <button type="button">Digite seu nome e clique aqui</button>
+            <p></p>
+
+            <script>
+                const botao = document.querySelector("button");
+                botao.onclick = function () {
+                    const campoNome = document.querySelector("input");
+                    const parSaida = document.querySelector("p");
+                    parSaida.textContent = 'Obrigado, ' + campoNome.value;
+                };
+            </script>
+            <img src="images/print-exemplo-onclick-debug-navegador.png" alt="Print do depuramento da página para exemplificar o onclick">
+        </div>
+    </main>
+</body>
+
+</html>

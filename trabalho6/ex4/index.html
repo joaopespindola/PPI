@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nós na Árvore DOM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        img {
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Tipos de nós na árvore DOM</h2>
+    <input type="text" id="myInput">
+    <!-- comentário -->
+    <pre id="output"></pre>
+
+    <script>
+        const output = document.querySelector("#output");
+        for (let node of document.body.childNodes)
+            output.textContent += node.constructor.prototype + '\n';
+
+        const input = document.querySelector("#myInput");
+        output.textContent += (input instanceof HTMLInputElement) + '\n';
+        output.textContent += (input instanceof HTMLElement) + '\n';
+        output.textContent += (input instanceof Element) + '\n';
+        output.textContent += (input instanceof Node) + '\n';
+        output.textContent += (input instanceof EventTarget) + '\n';
+
+        output.textContent += document.constructor.prototype + '\n';
+    </script>
+
+    <hr>
+
+    <p>Este código tem como objetivo demonstrar os tipos de nós presentes na árvore DOM da página.</p>
+    <img src="images/dom-tree.png" alt="Foto da árvore de DOM">
+    <p>Inicialmente, temos
+        um espaço em branco, seguido de um elemento "h2", um campo de entrada de texto (input), um comentário, um
+        elemento "pre" e, por fim, uma tag "script", ademais, temos também o espaço referente a quebra de linha que
+        também é contado. O código em JavaScript seleciona o elemento com o id "output", que
+        corresponde ao "pre", e, em seguida, percorre todos os nós filhos do elemento "body" utilizando um laço.</p>
+    <img src="images/print-filhos-body.png" alt="Print dos filhos do body">
+    <p>Dentro desse laço, a estrutura de protótipos de cada nó é concatenada à string que será exibida na tela. Após o
+        laço, são feitas verificações para identificar se o elemento de input pertence a diferentes tipos de nós na DOM,
+        usando o conceito de herança da Programação Orientada a Objetos.</p>
+    <img src="images/objetos-na-arvore-dom.png" alt="Print dos protótipos de objetos presentes na árvore DOM">
+    <p>Esses resultados também são concatenados ao
+        conteúdo do elemento "output". Por fim, o protótipo do construtor do objeto "document" é adicionado ao conteúdo
+        exibido na página.</p>
+
+</body>
+
+</html>
