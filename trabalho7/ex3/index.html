@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Interesses</title>
+    <style>
+        div {
+            background-color: #ececec;
+            width: 350px;
+            padding: 20px;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        input {
+            border-radius: 5px;
+            border: 2px solid black;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        ol {
+            background-color: #8a98d6;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        li {
+            margin: 10px 0;
+            padding: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        li>span {
+            margin-right: 10px;
+        }
+
+        li>button {
+            font-size: smaller;
+            border: none;
+            color: red;
+            background-color: transparent;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        li>button:hover {
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div>
+            <label for="interesse">Interesse:</label>
+            <input type="text" id="interesse" name="interesse">
+            <ol></ol>
+        </div>
+    </main>
+
+    <script>
+        // Seleciona o campo de input de interesse
+        const campoInteresse = document.querySelector("input");
+
+        // Adiciona um evento que será disparado quando uma tecla for liberada
+        campoInteresse.addEventListener("keyup", e => {
+
+            // Verifica se a tecla pressionada foi "Enter"
+            if (e.key === "Enter") {
+                const novoLi = document.createElement("li"); // Cria um novo elemento <li> para adicionar à lista
+                const novoSpan = document.createElement("span"); // Cria um <span> que conterá o texto do interesse
+                const novoBotao = document.createElement("button"); // Cria o botão 'X' para remover o item da lista
+
+                // Define o texto do <span> como o valor do input
+                novoSpan.textContent = campoInteresse.value;
+                novoBotao.textContent = 'X';
+
+                // Adiciona o <span> e o botão ao <li>
+                novoLi.appendChild(novoSpan);
+                novoLi.appendChild(novoBotao);
+
+                // Seleciona a lista ordenada <ol> e adiciona o novo <li> nela
+                const listaInteresses = document.querySelector("ol");
+                listaInteresses.appendChild(novoLi);
+
+                // Adiciona um evento de clique ao botão 'X' para remover o item da lista
+                novoBotao.onclick = function () {
+                    listaInteresses.removeChild(novoLi);
+                }
+
+                // Limpa o campo de input
+                campoInteresse.value = '';
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+
+<body>
+    <main>
+        <form name="cadastro" action="login.php" method="post">
+            <h2>Cadastro de Usuário</h2>
+            <div>
+                <label for="usuario">Usuario:</label>
+                <input type="text" name="usuario" id="usuario">
+                <span></span>
+            </div>
+            <div>
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" id="email">
+                <span></span>
+            </div>
+            <div>
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha">
+                <span></span>
+            </div>
+            <div>
+                <button type="submit">Entrar</button>
+            </div>
+        </form>
+    </main>
+    <script>
+        // O formulário cujo nome é cadastro ao ser enviado faz a chamada da função "validaForm()"
+        document.forms.cadastro.onsubmit = validaForm;
+        function validaForm(e) {
+            let form = e.target; // form referencia o formulário que está sendo submetido 
+            let formValido = true; // Variável começa como true e caso encontre alguma inconsistência ocorre a alteração no valor para false
+
+            // Seleciona o próximo elemento irmão no DOM para cada um dos campos (usuario, senha, email)
+            const spanUsuario = form.usuario.nextElementSibling;
+            const spanSenha = form.senha.nextElementSibling;
+            const spanEmail = form.email.nextElementSibling;
+
+            // Bloco para limpar qualquer possível mensagem de erro anterior
+            spanUsuario.textContent = "";
+            spanSenha.textContent = "";
+            spanEmail.textContent = "";
+
+            // Para cada campo do formulário, verifica-se o valor para garantir que não está vazio, caso esteja, formValido = false
+            if (form.usuario.value === "") {
+                spanUsuario.textContent = 'Usuário deve ser preenchido';
+                formValido = false;
+            }
+            if (form.senha.value === "") {
+                spanSenha.textContent = 'A senha deve ser preenchida';
+                formValido = false;
+            }
+            if (form.email.value === "") {
+                spanEmail.textContent = '0 email deve ser preenchido';
+                formValido = false;
+            }
+            // Caso !formValido = true, o método preventDefault impede a submissão do formulário
+            if (!formValido) {
+                e.preventDefault();
+            }
+        }
+    </script>
+</body>
+
+</html>
