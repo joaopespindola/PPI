@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <!-- 1: Tag de responsividade -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pacientes cadastrados</title>
+
+  <!-- 2: Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <style>
+    body {
+      padding-top: 2rem;
+    }
+
+    img {
+      width: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h3>Pacientes Cadastrados</h3>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Sexo</th>
+          <th>Email</th>
+
+          <th>Peso</th>
+          <th>Altura</th>
+          <th>Tipo Sanguíneo</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+    <p><a href="../">Menu de opções</a></p>
+  </div>
+
+  <script>
+
+    // Esta função busca no servidor um conteúdo no formato
+    // JSON utilizando uma requisição Ajax. A função será 
+    // apresentada em detalhes nas próximas aulas.
+    async function getJSON(url) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(response.statusText);
+        var dataText = await response.text();
+        const data = JSON.parse(dataText);
+        return data;
+      }
+      catch (e) {
+        console.log(e);
+        console.log(dataText ?? '');
+        return null;
+      }
+    }
+
+    async function carregaPacientes() {
+      const pacientes = await getJSON("controlador.php?acao=listarPacientes");
+      if (pacientes == null) return;
+
+      // Insere os dados dinamicamente na página
+      const tbody = document.querySelector("table > tbody");
+      for (let paciente of pacientes) {
+        const td1 = document.createElement("td"); td1.textContent = paciente.nome;
+        const td2 = document.createElement("td"); td2.textContent = paciente.sexo;
+        const td3 = document.createElement("td"); td3.textContent = paciente.email;
+        const td4 = document.createElement("td"); td4.textContent = paciente.peso;
+        const td5 = document.createElement("td"); td5.textContent = paciente.altura;
+        const td6 = document.createElement("td"); td6.textContent = paciente.tipoSanguineo;
+
+        const tr = document.createElement("tr");
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+        tr.appendChild(td5);
+        tr.appendChild(td6);
+        tbody.appendChild(tr);
+      }
+    }
+
+    carregaPacientes();
+
+  </script>
+
+</body>
+
+</html>
