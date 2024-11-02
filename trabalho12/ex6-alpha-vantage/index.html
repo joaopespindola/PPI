@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotações de Ações</title>
+    <style>
+        body {
+            width: 70%;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Consulta de Cotações de Ações</h1>
+
+    <form id="stock-form">
+        <div>
+            <input type="text" id="stock1" placeholder="Código da Ação (ex: PETR4)" required>
+            <input type="text" id="stock2" placeholder="Código da Ação (ex: VALE3)" required>
+            <input type="text" id="stock3" placeholder="Código da Ação (ex: BBDC4)" required>
+        </div>
+        <button type="submit">Consultar Cotações</button>
+    </form>
+
+    <div id="results"></div>
+
+    <script>
+        const apiKey = '5XP85ZJ1V9BA1Q0F';
+
+        // Adiciona um listener para o evento de envio do formulário
+        document.getElementById('stock-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Previne o envio do formulário
+
+            const stock1 = document.getElementById('stock1').value + '.SA';
+            const stock2 = document.getElementById('stock2').value + '.SA';
+            const stock3 = document.getElementById('stock3').value + '.SA';
+
+            // Cria a URL para a requisição à API usando o código da ação e a chave da API
+            const urls = [
+                `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock1}&apikey=${apiKey}`,
+                `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock2}&apikey=${apiKey}`,
+                `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock3}&apikey=${apiKey}`
+            ];
+
+            try {
+                // Realiza as requisições em paralelo
+                const responses = await Promise.all(urls.map(url => fetch(url))); // Faz várias requisições em paralelo 
+                //com fetch, usando Promise.all para aguardar todas serem concluídas, e await para armazenar 
+                //as respostas em responses.
+                const data = await Promise.all(responses.map(response => response.json()));
+
+                // Exibe os resultados
+                const resultsDiv = document.getElementById('results'); // Seleciona o div onde os resultados serão exibidos
+                resultsDiv.innerHTML = ''; // Limpa resultados anteriores
+
+                data.forEach(stockData => {
+                    const stockQuote = stockData['Global Quote']; // Acessa a parte da resposta que contém a cotação da ação
+                    if (stockQuote) {
+                        // Insere os resultados no HTML
+                        resultsDiv.innerHTML += `
+                            <div>
+                                <h2>${stockQuote['01. symbol']}</h2>
+                                <p>Preço Atual: ${stockQuote['05. price']}</p>
+                                <p>Variação: ${stockQuote['10. change percent']}</p>
+                            </div>
+                        `;
+                    } else {
+                        resultsDiv.innerHTML += `<p>Ação não encontrada.</p>`;
+                    }
+                });
+            } catch (error) {
+                console.error('Erro ao buscar cotações:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arte Aleatória</title>
+    <style>
+        body {
+            width: 70%;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Gerar Arte Aleatória</h1>
+
+    <form id="art-form">
+        <button type="submit">Gerar Arte Aleatória</button>
+    </form>
+
+    <main>
+        <div id="results"></div>
+    </main>
+
+    <script>
+        // Função que retorna uma arte aleatória da API do Instituto de Arte de Chicago
+        document.getElementById('art-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Previne o envio do formulário
+
+            // URL da API para buscar artes
+            const url = `https://api.artic.edu/api/v1/artworks?limit=50`; // Limite de 50 obras para seleção aleatória
+
+            try {
+                const response = await fetch(url); // Faz a requisição à API
+                const data = await response.json(); // Converte a resposta para JSON
+
+                // Seleciona uma obra de arte aleatória
+                const artworks = data.data; // Acessa a lista de artes
+                const randomIndex = Math.floor(Math.random() * artworks.length); // Gera um índice aleatório baseado no tamanho da lista
+                const randomArtwork = artworks[randomIndex]; // Seleciona uma obra aleatória
+
+                // Gera a URL da imagem da obra aleatória
+                const imageUrl = `https://www.artic.edu/iiif/2/${randomArtwork.image_id}/full/843,/0/default.jpg`;
+
+                // Exibe os resultados
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = ''; // Limpa os resultados anteriores
+
+                // Insere os detalhes da obra de arte no HTML
+                resultsDiv.innerHTML += `
+                    <div>
+                        <h2>${randomArtwork.title}</h2>
+                        <p>Artista: ${randomArtwork.artist_title || 'Desconhecido'}</p>
+                        <p>Ano: ${randomArtwork.date_display || 'Data não informada'}</p>
+                        <img src="${imageUrl}" alt="${randomArtwork.title}" width="500">
+                        <p><a href="https://www.artic.edu/artworks/${randomArtwork.id}" target="_blank">Ver mais detalhes</a></p>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Erro ao buscar a arte:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>
