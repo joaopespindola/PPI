@@ -3,9 +3,9 @@
 require "conexaoMysql.php";
 require "sessionVerification.php";
 
-session_start();
-exitWhenNotLoggedIn();
-$pdo = mysqlConnect();
+session_start();// Retoma a sessão para acessar o campo "user" da sessão
+exitWhenNotLoggedIn();// Função do "SessionVerificatin.php" para redirecionar o usuário para a página de login "index.html" se o usuário não estiver logado
+$pdo = mysqlConnect();// Conecta ao servidor do MySQL
 
 ?>
 <!DOCTYPE html>
@@ -45,12 +45,12 @@ $pdo = mysqlConnect();
 <body>
 
   <main>
-    <h2>Dados corretos! Bem vindo, <?php echo $_SESSION['user'] ?>!</h2>
+    <h2>Dados corretos! Bem vindo, <?php echo $_SESSION['user'] ?>!</h2><!-- Exibe o nome do usuário logado na sessão -->
     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut tenetur distinctio odio vel possimus necessitatibus
       aut ab nesciunt beatae, laudantium at alias, quaerat debitis quam labore fugit dolores amet? Temporibus.</p>
     <hr>
     <p><strong>Dica:</strong> clique em sair e posteriormente tente acessar esta página digitando manualmente 'home.php' no final da barra de endereços do navegador</p>
-    <a href="logout.php">SAIR<a>
+    <a href="logout.php">SAIR<a> <!--  Redireciona para a página de logout -->
   </main>
 
 </body>

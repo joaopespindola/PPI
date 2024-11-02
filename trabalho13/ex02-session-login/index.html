@@ -94,24 +94,30 @@
     async function sendForm(form) {
 
       try {
+        // Faz o envio do formulário para "login.php", pelo método POST, é criado um objeto FormData com o 
+        //"form" para enviar os dados do formulário para o servidor por meio de uma requisição Ajax com await
+        // para que a thread aguarde o retorno da promessa.
         const response = await fetch("login.php", { method: 'post', body: new FormData(form) });
-        if (!response.ok) throw new Error(response.statusText);
-        const loginResult = await response.json();
+        if (!response.ok) throw new Error(response.statusText);// Em caso de erro, lança uma exceção com o "statusText" da response
+        const loginResult = await response.json();// Converte o corpo da resposta em um objeto JavaScript
 
+        // Verifica se o login foi bem-sucedido
         if (loginResult.success)
-          window.location = loginResult.newLocation;
+          window.location = loginResult.newLocation;// Caso o login tenha sido efetuado com sucesso, redireciona para a página inicial "home.php"
         else {
+          // Se o login não foi efetuado com sucesso por credenciais erradas exibe uma mensagem de erro
           const parLoginFailMsg = document.querySelector("#loginFailMsg");
           parLoginFailMsg.textContent = 'Dados incorretos. Por favor, tente novamente.';
-          parLoginFailMsg.classList.remove('hide');
-          form.senha.value = "";
-          form.senha.focus();
+          parLoginFailMsg.classList.remove('hide');// Exibe a mensagem de erro
+          form.senha.value = "";// Limpa o campo de senha
+          form.senha.focus();// Posiciona o foco no campo de senha
         }
       }
       catch (e) {
-        const parLoginFailMsg = document.querySelector("#loginFailMsg");
+        const parLoginFailMsg = document.querySelector("#loginFailMsg");// Se o login não foi efetuado com sucesso por outro motivo
+        // como erros relacionado a problema de conexão ou no servidor, exibe uma mensagem de erro
         parLoginFailMsg.textContent = 'Falha inesperada. Entre em contato o administrador do sistema.';
-        parLoginFailMsg.classList.remove('hide');
+        parLoginFailMsg.classList.remove('hide');// Exibe a mensagem de erro
       }
     }
 

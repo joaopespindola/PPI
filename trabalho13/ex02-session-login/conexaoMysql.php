@@ -2,10 +2,10 @@
 
 function mysqlConnect()
 {
-  $db_host = "localhost";
-  $db_username = "ppi";
-  $db_password = "ppi";
-  $db_name = "ppi";
+  $db_host = "sql313.infinityfree.com";
+  $db_name = "if0_37069041_ppi";
+  $db_username = "if0_37069041";
+  $db_password = "OTU0EAk48caPloO";
 
   $options = [
     PDO::ATTR_EMULATE_PREPARES => false, // desativa a execução emulada de prepared statements
