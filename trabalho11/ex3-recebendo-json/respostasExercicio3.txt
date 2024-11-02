@@ -1,0 +1,6 @@
+i. O código de status retornado foi "200 OK".
+ii. "application/json" indica que a resposta terá o conteúdo do tipo application/json.
+iii. Na aba "Response" o valor é do tipo JSON.
+iv. O cabeçalho "server" tem valor "nginx".
+v. Não, a requisição HTTP não possui o cabeçalho content-type pois ela apenas recupera
+dados e não envia.

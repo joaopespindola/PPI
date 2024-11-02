@@ -1,0 +1,28 @@
+c)
+i. O código de status retornado foi "200 OK".
+ii. "text/html; charset=UTF-8" indica que a resposta terá o conteúdo do tipo text/html
+e o charset do tipo UTF-8.
+iii. Na aba "Response" o valor é do tipo HTML.
+iv. O cabeçalho "server" tem valor "nginx".
+v. Não, a requisição HTTP não possui o cabeçalho content-type pois ela apenas recupera
+dados e não envia.
+
+d)
+i. O código de status retornado foi "404 Not Found".
+ii. "text/html; charset=UTF-8" indica que a resposta terá o conteúdo do tipo text/html
+e o charset do tipo UTF-8.
+iii. Na aba "Response" o valor é do tipo HTML.
+iv. O cabeçalho "server" tem valor "nginx".
+v. Não, a requisição HTTP não possui o cabeçalho content-type pois ela apenas recupera
+dados e não envia.
+
+e)
+O código de status retornado foi "500 Internal Server Error" e não existe conteúdo no corpo
+da resposta pois a requisição não obteve retorno.
+
+f)
+O código de status retornado foi "200 OK" e no corpo da resposta temos um HTML com o erro 
+que foi retornado na requisição. Esse comportamento é útil no ambiente de desenvolvimento, 
+onde é seguro e auxilia o desenvolvedor a depurar o código durante o desenvolvimento e os testes,
+esse comportamento nunca deve ser usado pois pode expor informações sensíveis que facilitam possíveis
+ataques, comprometendo a segurança do sistema.

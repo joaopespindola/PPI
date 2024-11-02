@@ -1,0 +1,4 @@
+Content-type tem valor "application/json" e Content-length tem valor = 63.
+Na aba payload temos um JSON contendo a "apikey", "cep" e o "email". O payload
+represeneta os dados que mais interessam ao fazer a requisição, ou seja, o core da informação,
+a parte mais útil daquilo que está sendo transmitido.
